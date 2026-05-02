@@ -3,270 +3,485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitul Sendilkumar | Robotics Portfolio</title>
+    <title>Mitul Sendilkumar — Robotics &amp; Autonomy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0b10;
-            --surface: #14161f;
-            --surface-bright: #1c1f2b;
-            --accent: #ffb300; /* Electric Amber */
-            --accent-dim: rgba(255, 179, 0, 0.1);
-            --text-main: #f0f0f2;
-            --text-dim: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
-            --font-head: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --bg:           #080c12;
+            --bg-panel:     #0d1219;
+            --bg-card:      #111822;
+            --bg-card-hover:#141e2a;
+            --border:       rgba(255,255,255,0.07);
+            --border-mid:   rgba(255,255,255,0.12);
+            --accent:       #3b82f6;
+            --accent-dim:   rgba(59,130,246,0.1);
+            --text-1:       #e8edf3;
+            --text-2:       #8a9ab0;
+            --text-3:       #4f617a;
+            --font-display: 'Syne', sans-serif;
+            --font-body:    'IBM Plex Sans', sans-serif;
+            --font-mono:    'IBM Plex Mono', monospace;
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; background: var(--bg); }
-
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
+            background: var(--bg);
+            color: var(--text-1);
             font-family: var(--font-body);
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.65;
             overflow-x: hidden;
         }
-
-        /* Subtle Background Grid */
         body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(var(--border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            mask-image: radial-gradient(circle at 50% 50%, black, transparent);
+            content: '';
+            position: fixed; inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; line-height: 1.05; }
+        .label {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
         }
 
-        /* Typography */
-        h1, h2, h3 { font-family: var(--font-head); font-weight: 700; letter-spacing: -0.02em; }
-        .mono { font-family: var(--font-mono); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--accent); }
-
-        /* Navigation */
+        /* NAV */
         nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: 1.5rem 10%;
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(10, 11, 16, 0.8);
-            backdrop-filter: blur(12px);
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.25rem 6%;
+            background: rgba(8,12,18,0.88);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
         }
-        .nav-links a {
-            text-decoration: none; color: var(--text-dim);
-            margin-left: 2.5rem; font-family: var(--font-mono); font-size: 0.7rem;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: var(--accent); }
+        .nav-logo { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-1); text-decoration: none; letter-spacing: 0.06em; }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-2); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text-1); }
 
-        /* Hero Section */
+        /* SECTIONS */
+        section { position: relative; z-index: 1; padding: 7rem 6%; }
+        .sh { margin-bottom: 3.5rem; }
+        .sh .label { margin-bottom: 0.75rem; display: block; }
+        .sh h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 0.75rem; }
+        .sh .rule { width: 28px; height: 2px; background: var(--accent); }
+
+        /* HERO */
         #hero {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center;
-            padding: 0 10%; position: relative;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 5rem;
+            align-items: center;
+            padding-top: 8rem;
+            padding-bottom: 4rem;
         }
-        .hero-title { font-size: clamp(3.5rem, 8vw, 6rem); line-height: 0.9; margin-bottom: 1.5rem; }
-        .hero-title span { color: var(--accent); }
-        .hero-subtitle { max-width: 600px; color: var(--text-dim); font-size: 1.2rem; font-weight: 300; }
+        .hero-title { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; margin: 1.25rem 0 1.5rem; }
+        .hero-title .na { color: var(--accent); }
+        .hero-desc { font-size: 1rem; color: var(--text-2); max-width: 500px; font-weight: 300; line-height: 1.8; }
 
-        /* Sections */
-        section { padding: 8rem 10%; }
-        .section-header { margin-bottom: 4rem; }
-        .section-header h2 { font-size: 2.5rem; }
-        .section-header .line { width: 60px; height: 4px; background: var(--accent); margin-top: 1rem; }
+        /* Contact card */
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-mid);
+            border-radius: 10px;
+            padding: 1.75rem;
+        }
+        .contact-card .ch { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 1.25rem; display: block; }
+        .crow {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none; color: var(--text-2); font-size: 0.82rem;
+            transition: color 0.2s;
+        }
+        .crow:last-child { border-bottom: none; }
+        .crow:hover { color: var(--text-1); }
+        .crow svg { width: 13px; height: 13px; flex-shrink: 0; }
+        .crow .cv { font-family: var(--font-mono); font-size: 0.72rem; }
 
-        /* Project Cards */
-        .project-block {
+        /* ABOUT */
+        .about-body { max-width: 760px; color: var(--text-2); font-size: 0.98rem; font-weight: 300; line-height: 1.85; }
+        .about-body strong { color: var(--text-1); font-weight: 500; }
+        .about-body p + p { margin-top: 1rem; }
+
+        /* PROJECTS */
+        .pb {
             display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
-            margin-bottom: 8rem; align-items: center;
+            align-items: start;
+            padding-bottom: 5.5rem; margin-bottom: 5.5rem;
+            border-bottom: 1px solid var(--border);
         }
-        .project-content h3 { font-size: 2rem; margin-bottom: 1rem; }
-        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
-        .tag {
-            background: var(--accent-dim); color: var(--accent);
-            padding: 0.2rem 0.6rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.7rem;
-        }
+        .pb:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .peyebrow { margin-bottom: 0.9rem; }
+        .ptitle { font-size: 2rem; margin-bottom: 0.9rem; }
+        .pdesc { color: var(--text-2); font-size: 0.92rem; line-height: 1.8; font-weight: 300; }
 
-        /* Image Grids */
-        .image-gallery {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
-        }
-        .gallery-item {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 8px; overflow: hidden; position: relative;
-        }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .gallery-item:hover img { transform: scale(1.05); }
-        .gallery-item.wide { grid-column: span 2; }
+        .statrow { display: flex; gap: 0.75rem; margin: 1.35rem 0; }
+        .sbox { background: var(--bg-card); border: 1px solid var(--border); border-radius: 5px; padding: 0.65rem 0.75rem; text-align: center; flex: 1; }
+        .sbox .sv { font-family: var(--font-mono); font-size: 1.15rem; color: var(--accent); font-weight: 500; display: block; }
+        .sbox .sl { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); margin-top: 0.15rem; }
 
-        /* Research Timeline */
-        .research-card {
-            background: var(--surface); border-left: 3px solid var(--accent);
-            padding: 2rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;
-            transition: background 0.3s;
-        }
-        .research-card:hover { background: var(--surface-bright); }
+        .tagrow { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1.1rem 0; }
+        .tag { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(59,130,246,0.18); padding: 0.18rem 0.55rem; border-radius: 3px; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.04em; }
 
-        /* Contact */
-        .contact-box {
-            background: var(--surface); border: 1px solid var(--border);
-            padding: 4rem; border-radius: 12px; text-align: center;
+        ul.bl { list-style: none; margin: 0.9rem 0; }
+        ul.bl li { position: relative; padding-left: 1.2rem; color: var(--text-2); font-size: 0.87rem; line-height: 1.7; margin-bottom: 0.3rem; }
+        ul.bl li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-family: var(--font-mono); font-size: 0.8rem; }
+
+        .award-note { font-size: 0.72rem; color: var(--accent); margin-top: 0.9rem; font-family: var(--font-mono); letter-spacing: 0.04em; }
+
+        .lrow { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1.35rem; }
+        .lnk {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.38rem 0.85rem;
+            border: 1px solid var(--border-mid); color: var(--text-2);
+            font-family: var(--font-mono); font-size: 0.61rem; letter-spacing: 0.05em;
+            text-decoration: none; border-radius: 4px; background: var(--bg-card);
+            transition: all 0.2s; cursor: pointer;
         }
-        .btn {
-            display: inline-block; padding: 1rem 2.5rem;
-            border: 1px solid var(--accent); color: var(--accent);
-            text-decoration: none; font-family: var(--font-mono);
-            transition: all 0.3s; margin-top: 2rem;
+        .lnk svg { width: 10px; height: 10px; flex-shrink: 0; }
+        .lnk:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+        .mwrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .mwrap iframe { display: block; width: 100%; aspect-ratio: 16/9; border: none; }
+        .minner { padding: 1.6rem; }
+        .minner p { color: var(--text-2); font-size: 0.88rem; line-height: 1.78; font-weight: 300; }
+
+        /* EXPERIENCE */
+        .ecard {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 2px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            padding: 1.6rem 1.9rem;
+            margin-bottom: 1.1rem;
+            transition: background 0.2s;
         }
-        .btn:hover { background: var(--accent); color: var(--bg); }
+        .ecard:hover { background: var(--bg-card-hover); }
+        .emeta { display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+        .edate { font-family: var(--font-mono); font-size: 0.63rem; color: var(--text-3); letter-spacing: 0.08em; }
+        .eorg  { font-family: var(--font-mono); font-size: 0.63rem; color: var(--text-2); }
+        .erole { font-size: 1.02rem; margin-bottom: 0.45rem; }
+        .ebody { color: var(--text-2); font-size: 0.86rem; line-height: 1.75; font-weight: 300; }
+        .elink {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent);
+            text-decoration: none; border: 1px solid rgba(59,130,246,0.22);
+            padding: 0.14rem 0.45rem; border-radius: 3px; margin-left: 0.45rem;
+            transition: background 0.2s;
+        }
+        .elink:hover { background: var(--accent-dim); }
+        .elink svg { width: 8px; height: 8px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* SIDE */
+        .sgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+        .sc { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.4rem; transition: all 0.2s; }
+        .sc:hover { border-color: var(--border-mid); background: var(--bg-card-hover); }
+        .sc .sc-lbl { margin-bottom: 0.65rem; display: block; }
+        .sc h4 { font-size: 0.98rem; margin-bottom: 0.45rem; }
+        .sc p { font-size: 0.82rem; color: var(--text-2); line-height: 1.7; font-weight: 300; }
+
+        .cwrap { margin-top: 3.5rem; }
+        .cwrap .cnote { font-size: 0.83rem; color: var(--text-2); margin: 0.5rem 0 1rem; }
+        .cgrid { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+        .ct { font-family: var(--font-mono); font-size: 0.6rem; padding: 0.22rem 0.65rem; border-radius: 3px; border: 1px solid var(--border); color: var(--text-2); }
+        .ct.hi { border-color: rgba(59,130,246,0.25); color: var(--accent); background: var(--accent-dim); }
+
+        /* CONTACT */
+        .csi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 4rem; text-align: center; max-width: 660px; margin: 0 auto; }
+        .csi h2 { font-size: 2rem; margin: 0.75rem 0; }
+        .csi p { color: var(--text-2); font-size: 0.92rem; margin-bottom: 2rem; }
+        .btnp { display: inline-block; padding: 0.8rem 2.25rem; background: var(--accent); color: #fff; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 5px; transition: opacity 0.2s; }
+        .btnp:hover { opacity: 0.82; }
+
+        footer { padding: 2.25rem 6%; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; }
+        footer p { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-3); letter-spacing: 0.08em; }
+
+        .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
 
         @media (max-width: 900px) {
-            .project-block { grid-template-columns: 1fr; }
+            #hero { grid-template-columns: 1fr; gap: 3rem; }
+            .pb { grid-template-columns: 1fr; gap: 2rem; }
+            .sgrid { grid-template-columns: 1fr; }
             nav .nav-links { display: none; }
+            section { padding: 5rem 5%; }
         }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+        /* SVG icon helper */
+        .ico-stroke { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .ico-fill { fill: var(--accent); stroke: none; }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#" class="mono" style="text-decoration:none; font-weight:700; font-size:1.2rem">MS.</a>
+    <a href="#" class="nav-logo">MS_PORTFOLIO</a>
     <div class="nav-links">
-        <a href="#about">ABOUT</a>
-        <a href="#projects">PROJECTS</a>
-        <a href="#research">RESEARCH</a>
-        <a href="#contact">CONTACT</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#other">Other</a>
+        <a href="#contact">Contact</a>
     </div>
 </nav>
 
+<!-- ===== HERO ===== -->
 <section id="hero">
-    <p class="mono">Gap Year Research Portfolio</p>
-    <h1 class="hero-title">Engineering <span>Autonomous</span> Certainty.</h1>
-    <p class="hero-subtitle">Mitul Sendilkumar — Developing high-performance robotics and computer vision stacks for unpredictable real-world environments.</p>
+    <div>
+        <span class="label">Robotics &amp; Autonomy Research</span>
+        <h1 class="hero-title">Mitul<br><span class="na">Sendilkumar.</span></h1>
+        <p class="hero-desc">Building autonomous robotic systems and embedded computer vision stacks for real-world deployment in unstructured environments.</p>
+    </div>
+
+    <div class="contact-card">
+        <span class="ch">Contact &amp; Links</span>
+
+        <a href="mailto:mitulisavailable@gmail.com" class="crow">
+            <svg viewBox="0 0 24 24" class="ico-stroke"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            <span class="cv">mitulisavailable@gmail.com</span>
+        </a>
+        <a href="tel:2109990935" class="crow">
+            <svg viewBox="0 0 24 24" class="ico-stroke"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 013 .84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <span class="cv">210 999 0935</span>
+        </a>
+        <a href="https://www.linkedin.com/in/mitul-sendilkumar" target="_blank" class="crow">
+            <svg viewBox="0 0 24 24" class="ico-stroke"><rect x="2" y="2" width="20" height="20" rx="4"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8.01" stroke-width="2.5"/><path d="M12 16v-5c0-1.5 4-1.5 4 0v5"/></svg>
+            <span class="cv">linkedin.com/in/mitul-sendilkumar</span>
+        </a>
+        <a href="https://github.com/MiddleSender45" target="_blank" class="crow">
+            <svg viewBox="0 0 24 24" class="ico-fill"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            <span class="cv">github.com/MiddleSender45</span>
+        </a>
+    </div>
 </section>
 
+<!-- ===== ABOUT ===== -->
 <section id="about" class="reveal">
-    <div class="section-header">
-        <p class="mono">01. Profile</p>
-        <h2>The Mission</h2>
-        <div class="line"></div>
+    <div class="sh">
+        <span class="label">01 — Profile</span>
+        <h2>Introduction</h2>
+        <div class="rule"></div>
     </div>
-    <div style="max-width: 800px; font-size: 1.1rem; color: var(--text-dim)">
-        <p>I am a San Antonio-based robotics researcher currently conducting independent and institutional research during my gap year. My work bridges the gap between theoretical simulation and messy, real-world deployment.</p>
-        <br>
-        <p>Currently researching at <strong>Trinity University</strong> (Dr. Nickels) and mentored by engineers at <strong>Southwest Research Institute (SwRI)</strong>. I specialize in ROS 2 architectures, embedded ML (Edge Impulse), and maritime autonomy.</p>
+    <div class="about-body">
+        <p>I am a San Antonio-based robotics researcher conducting independent and institutional research during my gap year. My work sits at the intersection of embedded systems, autonomous navigation, and real-time computer vision — focused on deploying capable autonomy in constrained, real-world environments.</p>
+        <p>Currently Software Lead for <strong>TRIPPY</strong>, an open-source planetary rover platform, under <strong>Dr. Kevin Nickels at Trinity University</strong>. Concurrently developing <strong>MARLIN</strong>, an autonomous surface vehicle for maritime rescue, mentored by <strong>Dr. Prasanna Kolar at Southwest Research Institute (SwRI)</strong>. Upcoming work at <strong>Alt-Bionics</strong> involves applying vision-language-action models to robotic prosthetics.</p>
     </div>
 </section>
 
+<!-- ===== PROJECTS ===== -->
 <section id="projects">
-    <div class="section-header">
-        <p class="mono">02. Selected Works</p>
+    <div class="sh">
+        <span class="label">02 — Selected Works</span>
         <h2>Robotic Systems</h2>
-        <div class="line"></div>
+        <div class="rule"></div>
     </div>
 
-    <div class="project-block reveal">
-        <div class="project-content">
-            <p class="mono">Trinity University Lab</p>
-            <h3>TRIPPY Rover</h3>
-            <p style="color: var(--text-dim)">Software lead for the Trinity Robotics Instructional Planetary Platform. This Sawppy variant utilizes a Kinect RGB-D sensor to bridge the gap between human teleoperation and fully autonomous navigation.</p>
-            <div class="project-tags">
-                <span class="tag">ROS 2 Jazzy</span>
-                <span class="tag">Gazebo Harmonic</span>
-                <span class="tag">Kinect RGB-D</span>
-                <span class="tag">Nav2</span>
-                <span class="tag">Python</span>
+    <!-- MARLIN -->
+    <div class="pb reveal">
+        <div>
+            <span class="label peyebrow">Independent Research · SwRI Mentorship</span>
+            <h3 class="ptitle">MARLIN ASV</h3>
+            <p class="pdesc">An autonomous surface vehicle for proactive drowning detection and rescue. Developed end-to-end: full hardware CAD, embedded firmware, and an ultralight on-device computer vision pipeline running at 10 fps on an ESP32-S3 microcontroller.</p>
+
+            <div class="statrow">
+                <div class="sbox"><span class="sv">95%</span><span class="sl">Recall</span></div>
+                <div class="sbox"><span class="sv">99%</span><span class="sl">Accuracy</span></div>
+                <div class="sbox"><span class="sv">10fps</span><span class="sl">ESP32-S3</span></div>
+                <div class="sbox"><span class="sv">&lt;$500</span><span class="sl">Build cost</span></div>
             </div>
-            <p style="font-size: 0.9rem; color: var(--text-dim)">Building a patrol-and-detour stack that allows the rover to investigate anomalies while maintaining a global mission path.</p>
+
+            <div class="tagrow">
+                <span class="tag">MicroPython</span><span class="tag">ESP32-S3</span>
+                <span class="tag">Edge Impulse / FOMO</span><span class="tag">Computer Vision</span>
+                <span class="tag">GPS · IMU · LiDAR</span><span class="tag">Differential Thrust</span>
+                <span class="tag">CAD / Onshape</span>
+            </div>
+
+            <ul class="bl">
+                <li>Trained a FOMO-based classifier on a custom, hand-labeled, open-sourced dataset for drowning victim detection</li>
+                <li>Developing lightweight custom middleware analogous to ROS for the microcontroller-based architecture</li>
+                <li>Sensor fusion across magnetometer, IMU, and GPS enabling differential-thrust autonomous heading control</li>
+                <li>Authored full CAD design and all embedded firmware from scratch</li>
+            </ul>
+
+            <p class="award-note">Keynote · AJAS &nbsp;·&nbsp; IEEE &amp; U.S. Navy Special Awards &nbsp;·&nbsp; 1st Place Engineering (AJAS &amp; ARSEF)</p>
+
+            <div class="lrow">
+                <a href="https://github.com/MiddleSender45/marlinv1" target="_blank" class="lnk">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    GitHub Repo
+                </a>
+                <a href="https://drive.google.com/file/d/1Ez2MAbrUNOZ2zwbKLqyyjG93jPQoKXpx/view?usp=gmail" target="_blank" class="lnk">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    Research Poster
+                </a>
+            </div>
         </div>
-        
-        <div class="image-gallery">
-            <div class="gallery-item wide">
-                <img src="image_091f9c.jpg" alt="TRIPPY Rover Hardware Build">
-            </div>
-            <div class="gallery-item">
-                <img src="image_091fb5.jpg" alt="Gazebo Simulation & RViz Pointcloud">
-            </div>
-            <div class="gallery-item">
-                <img src="image_091fbc.jpg" alt="Fusion 360 Design Context">
-            </div>
+
+        <div class="mwrap">
+            <iframe src="https://www.youtube.com/embed/QcL_4hQYVng" allowfullscreen title="MARLIN Demo"></iframe>
         </div>
     </div>
 
-    <div class="project-block reveal">
-        <div class="image-gallery" style="order: 2">
-             <div class="gallery-item wide" style="aspect-ratio: 16/9; background: #000;">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/QcL_4hQYVng" frameborder="0" allowfullscreen></iframe>
-             </div>
-        </div>
-        <div class="project-content" style="order: 1">
-            <p class="mono">Independent Research</p>
-            <h3>MARLIN ASV</h3>
-            <p style="color: var(--text-dim)">An autonomous surface vehicle for drowning prevention. Recognized with <strong>Special Awards from IEEE and the U.S. Navy</strong>. Proved that high-fidelity person detection is possible on sub-$10 microcontrollers using FOMO-based ML models.</p>
-            <div class="project-tags">
-                <span class="tag">MicroPython</span>
-                <span class="tag">ESP32-S3</span>
-                <span class="tag">Computer Vision</span>
-                <span class="tag">Path Planning</span>
+    <!-- TRIPPY -->
+    <div class="pb reveal">
+        <div class="mwrap" style="order:2">
+            <div class="minner">
+                <span class="label" style="display:block;margin-bottom:0.7rem">Trinity University · Hackaday.io</span>
+                <p>TRIPPY (Trinity Robotics Instructional Planetary Platform) is a Sawppy-variant rover serving as an open-source research and education platform, providing engineering students a robust hardware base for advanced ROS 2 autonomy development.</p>
+                <div class="lrow">
+                    <a href="https://github.com/MiddleSender45/ros2_sawppy" target="_blank" class="lnk">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        GitHub Repo
+                    </a>
+                    <a href="https://hackaday.io/project/203634-trippy-a-sawppy-variant" target="_blank" class="lnk">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+                        Hackaday.io
+                    </a>
+                </div>
             </div>
-            <p style="font-size: 0.9rem; color: var(--accent)">Key Achievement: Keynote Speaker at the American Junior Academy of Sciences.</p>
+        </div>
+
+        <div style="order:1">
+            <span class="label peyebrow">Trinity University Lab · Dr. Kevin Nickels</span>
+            <h3 class="ptitle">TRIPPY Rover</h3>
+            <p class="pdesc">Software lead for an open-source Sawppy-variant rover. Building a patrol-and-detour autonomy stack enabling the rover to investigate detected anomalies while maintaining a global mission path — integrating Kinect RGB-D perception with the full ROS 2 Nav2 pipeline.</p>
+
+            <div class="tagrow">
+                <span class="tag">ROS 2 Jazzy</span><span class="tag">Gazebo Harmonic</span>
+                <span class="tag">Kinect RGB-D</span><span class="tag">Nav2</span>
+                <span class="tag">YOLOv8</span><span class="tag">Python</span>
+                <span class="tag">Ubuntu / WSL</span><span class="tag">DDS / Networking</span>
+            </div>
+
+            <ul class="bl">
+                <li>Wrote a custom ROS 2 perception package integrating YOLOv8 for real-time object detection on the rover</li>
+                <li>Architected distributed networking for multi-machine ROS 2 communication; debugged DDS discovery across subnets</li>
+                <li>Integrated simulated visual and LiDAR odometry into the Nav2 navigation stack</li>
+                <li>Built full Linux development environment from scratch across WSL and native Ubuntu; deep familiarity with low-level networking and ROS 2 tooling</li>
+            </ul>
         </div>
     </div>
 </section>
 
-<section id="research" class="reveal">
-    <div class="section-header">
-        <p class="mono">03. Timeline</p>
-        <h2>Research & Experience</h2>
-        <div class="line"></div>
-    </div>
-    
-    <div class="research-card">
-        <p class="mono">2025 - Present</p>
-        <h4 style="font-size:1.3rem">Software Lead, TRIPPY Project</h4>
-        <p style="color: var(--text-dim)">Trinity University. Transitioned the lab from Gazebo Classic to Harmonic. Integrated Kinect depth-sensing into the ROS 2 navigation stack.</p>
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience" class="reveal">
+    <div class="sh">
+        <span class="label">03 — Timeline</span>
+        <h2>Research &amp; Experience</h2>
+        <div class="rule"></div>
     </div>
 
-    <div class="research-card">
-        <p class="mono">2024 - Present</p>
-        <h4 style="font-size:1.3rem">Lead Researcher, MARLIN ASV</h4>
-        <p style="color: var(--text-dim)">Mentored by SwRI engineers. Developed the complete electrical and software architecture for a low-cost maritime rescue robot.</p>
+    <div class="ecard">
+        <div class="emeta">
+            <span class="edate">Upcoming · 2026</span>
+            <span class="eorg">Alt-Bionics</span>
+        </div>
+        <div class="erole">
+            Robotics Research Intern
+            <a href="https://www.altbionics.com/" target="_blank" class="elink">altbionics.com <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+        </div>
+        <p class="ebody">Mentored by Mr. Ryan Saavedra. Implementing vision-language-action (VLA) models on robotic prosthetic hands to enable generalizable, context-aware grasping and manipulation tasks.</p>
+    </div>
+
+    <div class="ecard">
+        <div class="emeta">
+            <span class="edate">Feb 2026 – Present</span>
+            <span class="eorg">Trinity University</span>
+        </div>
+        <div class="erole">
+            Software Lead — TRIPPY Rover
+            <a href="https://hackaday.io/project/203634-trippy-a-sawppy-variant" target="_blank" class="elink">Hackaday <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+            <a href="https://github.com/MiddleSender45/ros2_sawppy" target="_blank" class="elink">GitHub <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+        </div>
+        <p class="ebody">Under Dr. Kevin Nickels. Developed YOLOv8 perception package, distributed networking architecture, and integrated visual/LiDAR odometry into the ROS 2 Nav2 stack. Full Linux development environment management across WSL and native Ubuntu.</p>
+    </div>
+
+    <div class="ecard">
+        <div class="emeta">
+            <span class="edate">Jun 2025 – Present</span>
+            <span class="eorg">SwRI Mentorship</span>
+        </div>
+        <div class="erole">
+            Lead Researcher — MARLIN ASV
+            <a href="https://github.com/MiddleSender45/marlinv1" target="_blank" class="elink">GitHub <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+        </div>
+        <p class="ebody">Mentored by Dr. Prasanna Kolar. Designed and built the complete electrical, mechanical, and software architecture for a sub-$500 maritime rescue ASV. Trained an open-sourced FOMO model achieving 95% recall and 99% accuracy at 10 fps on an ESP32-S3. Developing custom microcontroller middleware.</p>
     </div>
 </section>
 
+<!-- ===== OTHER ===== -->
+<section id="other" class="reveal">
+    <div class="sh">
+        <span class="label">04 — Beyond the Lab</span>
+        <h2>Side Projects &amp; Background</h2>
+        <div class="rule"></div>
+    </div>
+
+    <div class="sgrid">
+        <div class="sc">
+            <span class="label sc-lbl">App Development</span>
+            <h4>Wispora</h4>
+            <p>A journaling and time-management application with an embedded Ollama language model agent for task coordination, scheduling suggestions, and contextual reminders derived from journal entries.</p>
+        </div>
+        <div class="sc">
+            <span class="label sc-lbl">Embedded Hardware</span>
+            <h4>Khord</h4>
+            <p>A custom Bluetooth adapter enabling simultaneous wired and wireless audio transmission — firmware, PCB-level integration, and low-latency signal routing to bridge analog and wireless audio streams.</p>
+        </div>
+        <div class="sc">
+            <span class="label sc-lbl">Aerospace / Mechanical</span>
+            <h4>RC Aircraft</h4>
+            <p>Designed, built, and flew fixed-wing RC aircraft — hands-on work in aerodynamics, motor control, and real-time stabilization electronics.</p>
+        </div>
+    </div>
+
+    <div class="cwrap">
+        <span class="label">Relevant Coursework</span>
+        <p class="cnote">All AP examinations scored 5/5.</p>
+        <div class="cgrid">
+            <span class="ct hi">AP Physics C: Mechanics</span>
+            <span class="ct hi">AP Physics C: E&amp;M</span>
+            <span class="ct hi">AP Physics 1</span>
+            <span class="ct hi">AP Physics 2</span>
+            <span class="ct hi">AP Calculus BC</span>
+            <span class="ct hi">Multivariable Calculus</span>
+            <span class="ct hi">AP Calculus AB</span>
+            <span class="ct hi">AP CS A</span>
+            <span class="ct">AP CS Principles</span>
+            <span class="ct">AP Chemistry</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
 <section id="contact" class="reveal">
-    <div class="contact-box">
-        <p class="mono">Get in touch</p>
-        <h2>Available for Research Collaboration</h2>
-        <p style="color: var(--text-dim); margin-top:1rem">mitulsendilkumar@gmail.com</p>
-        <a href="mailto:mitulsendilkumar@gmail.com" class="btn">SEND MESSAGE</a>
+    <div class="csi">
+        <span class="label">Get in touch</span>
+        <h2>Open to Research Collaboration</h2>
+        <p>Interested in robotics, autonomy, embedded ML, or maritime systems — reach out directly.</p>
+        <a href="mailto:mitulisavailable@gmail.com" class="btnp">Send a Message</a>
     </div>
 </section>
 
-<footer style="padding: 4rem 10%; border-top: 1px solid var(--border); text-align: center">
-    <p class="mono" style="color: var(--text-dim)">© 2026 MITUL SENDILKUMAR. Built for Academic Review.</p>
+<footer>
+    <p>© 2026 Mitul Sendilkumar</p>
+    <p>Built for Academic Review</p>
 </footer>
 
 <script>
-    // Reveal animations on scroll
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
-
 </body>
 </html>
